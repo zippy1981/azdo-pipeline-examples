@@ -1,10 +1,10 @@
 steps:
+
 - script: |
    terraform init
   workingDirectory: '$(terraform.path)'
   displayName: 'Run terraform init to download plugins'
 
-steps:
 - script: |
    terraform validate
   workingDirectory: '$(terraform.path)'
