@@ -1,6 +1,6 @@
 steps:
 - script: |
-   terraform validate -check-variables=false
+   terraform validate
   workingDirectory: '$(terraform.path)'
   displayName: 'terraform validate'
 

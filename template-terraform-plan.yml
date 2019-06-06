@@ -1,9 +1,4 @@
 steps:
-- task: JamiePhillips.Terraform.TerraformTool.TerraformTool@0
-  displayName: 'Use Terraform $(terraform.version)'
-  inputs:
-    version: '$(terraform.version)'
-
 - script: |
    az login --service-principal -u $(SPN-ID) -p $(SPN-SECRET) --tenant $(TENANT-ID)
    ACCESS_KEY=`az storage account keys list -n $(STORAGE_ACCT) -o json | jq -r '.[0].value'`
@@ -22,7 +17,7 @@ steps:
   displayName: 'Create terraform.tfvars'
 
 - script: |
-   terraform validate -check-variables=false
+   terraform validate
   workingDirectory: '$(terraform.path)'
   displayName: 'Terraform Validate'
 
