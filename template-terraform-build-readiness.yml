@@ -88,9 +88,9 @@ steps:
    #sudo apt-get update
    #sudo apt-get install -y python-setuptools
    echo "Installing wheel"
-   pip install wheel
+   sudo pip install wheel
    echo "Installing pre-commit pip package"
-   pip install pre-commit
+   sudo pip install pre-commit
    cat <<EOF > .pre-commit-config.yaml
    - repo: git://github.com/antonbabenko/pre-commit-terraform
      rev: v1.8.1
@@ -117,11 +117,17 @@ steps:
   continueOnError: true
 
 - script: |
-   git branch -a
-   git add .
-   git commit -am 'code readiness - linting, formatting, docs [***NO_CI***]'
-   git push
-  displayName: 'commit code corrections to master'
+    if [[ -z $(git ls-files --modified )  ]]; then
+      set PRECOMMIT_CHANGES_BRANCH=pre-commit-terraform/$(Build.Id)
+      echo "committing cleanup changes by terraform pre-commit hook to $PRECOMMIT_CHANGES_BRANCH"
+      git git checkout -b pre-commit-terraform/$(Build.Id)
+      git add .
+      git commit -am 'code readiness - linting, formatting, docs [***NO_CI***]'
+      git push
+    else
+      echo "No changes by terraform pre-commit hooks."
+    fi
+  displayName: 'commit code corrections to a new branch'
   workingDirectory: '$(terraform.path)'
   continueOnError: true
 
