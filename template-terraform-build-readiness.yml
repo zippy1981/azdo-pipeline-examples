@@ -78,7 +78,8 @@ steps:
 - script: |
    # NEED TO INSTALL THIS HERE UNTIL terraform-docs GETS ONTO THE AGENTS
    go get github.com/segmentio/terraform-docs
-   ln -sf ~/go/bin/terraform-docs /usr/local/bin/terraform-docs
+   echo PATH => $PATH
+   #ln -sf ~/go/bin/terraform-docs /usr/local/bin/terraform-docs
   workingDirectory: '$(terraform.path)'
   displayName: 'install terraform-docs'
 
