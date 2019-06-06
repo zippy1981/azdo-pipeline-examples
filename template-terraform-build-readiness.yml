@@ -1,19 +1,14 @@
 steps:
 - script: |
+   terraform init
+  workingDirectory: '$(terraform.path)'
+  displayName: 'Run terraform init to download plugins'
+
+steps:
+- script: |
    terraform validate
   workingDirectory: '$(terraform.path)'
   displayName: 'terraform validate'
-
-- script: |
-   git --version
-   git config --global user.email "ado@here.com"
-   git config --global user.name "ado"
-   git checkout $(Build.SourceBranchName)
-   git pull
-   git branch -a
-   git status
-  displayName: 'checkout $(Build.SourceBranchName)'
-  workingDirectory: '$(terraform.path)'
 
 - script: |
    # CHECK FOR VALUES IN AZURERM PROVIDER
