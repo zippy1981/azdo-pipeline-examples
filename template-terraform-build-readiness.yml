@@ -79,7 +79,10 @@ steps:
    # NEED TO INSTALL THIS HERE UNTIL terraform-docs GETS ONTO THE AGENTS
    go get github.com/segmentio/terraform-docs
    echo "PATH => $PATH"
-   echo "GOPATH => $GOPATH"
+   echo "GOPATH => $GOPATH; Contents:"
+   ls -l ~/go
+   echo 'Usr/local/bin contents'
+   ls -l /usr/local/bin
    sudo ln -sf ~/go/bin/terraform-docs /usr/local/bin/terraform-docs
   workingDirectory: '$(terraform.path)'
   displayName: 'install terraform-docs'
