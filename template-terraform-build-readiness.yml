@@ -1,9 +1,9 @@
 steps:
 
 - script: |
-   terraform init
+   terraform get
   workingDirectory: '$(terraform.path)'
-  displayName: 'Run terraform init to download plugins'
+  displayName: 'Run "terraform get" to download plugins'
 
 - script: |
    terraform validate
