@@ -87,6 +87,8 @@ steps:
 - script: |
    #sudo apt-get update
    #sudo apt-get install -y python-setuptools
+   echo "Installing wheel"
+   pip install wheel
    echo "Installing pre-commit pip package"
    pip install pre-commit
    cat <<EOF > .pre-commit-config.yaml
