@@ -79,13 +79,15 @@ steps:
    # NEED TO INSTALL THIS HERE UNTIL terraform-docs GETS ONTO THE AGENTS
    go get github.com/segmentio/terraform-docs
    echo "PATH => $PATH"
-   #ln -sf ~/go/bin/terraform-docs /usr/local/bin/terraform-docs
+   echo "GOPATH => $GOPATH"
+   #sudo ln -sf ~/go/bin/terraform-docs /usr/local/bin/terraform-docs
   workingDirectory: '$(terraform.path)'
   displayName: 'install terraform-docs'
 
 - script: |
-   sudo apt-get update
-   sudo apt-get install -y python-setuptools
+   #sudo apt-get update
+   #sudo apt-get install -y python-setuptools
+   echo "Installing pre-commit pip package"
    pip install pre-commit
    cat <<EOF > .pre-commit-config.yaml
    - repo: git://github.com/antonbabenko/pre-commit-terraform
